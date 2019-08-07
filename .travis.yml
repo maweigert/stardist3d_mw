@@ -73,10 +73,8 @@ before_install:
 
 install: skip
   # - pip install $TENSORFLOW $KERAS
-  # - echo "+++++++++++++++++++++++++++"
-  # - echo `which gcc`
-  # - CC=gcc-6 && CXX=g++-6 echo `which gcc`
-  # - CC=gcc-6 && CXX=g++-6 pip install .
+  - CC=gcc-6 && CXX=g++-6 echo `gcc -V`
+  - CC=gcc-6 && CXX=g++-6 pip install .
 
 script:
   - echo `which gcc`
