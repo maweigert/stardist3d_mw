@@ -16,6 +16,14 @@ from csbdeep.utils.six import Path
 from .matching import matching_dataset
 
 
+def gputools_available():
+    try:
+        import gputools
+    except:
+        return False
+    return True
+
+
 def path_absolute(path_relative):
     """ Get absolute path to resource"""
     base_path = os.path.abspath(os.path.dirname(__file__))
@@ -137,16 +145,17 @@ def sample_points(n_samples, mask, prob=None, b=2):
 
 def calculate_extents(lbl, func=np.median):
     """ Aggregate bounding box sizes of objects in label images. """
-    if isinstance(lbl,(tuple,list)) or lbl.ndim==4:
+    if isinstance(lbl,(tuple,list)) or (isinstance(lbl,np.ndarray) and lbl.ndim==4):
         return func(np.stack([calculate_extents(_lbl,func) for _lbl in lbl], axis=0), axis=0)
 
-    lbl.ndim == 3 or _raise(ValueError("label image should be 3 dimensional"))
+    n = lbl.ndim
+    n in (2,3) or _raise(ValueError("label image should be 2- or 3-dimensional (or pass a list of these)"))
 
     regs = regionprops(lbl)
     if len(regs) == 0:
-        return np.zeros(3)
+        return np.zeros(n)
     else:
-        extents = np.array([np.array(r.bbox[3:])-np.array(r.bbox[:3]) for r in regs])
+        extents = np.array([np.array(r.bbox[n:])-np.array(r.bbox[:n]) for r in regs])
         return func(extents, axis=0)
 
 
@@ -208,7 +217,6 @@ def optimize_threshold(Y, Yhat, model, nms_thresh, measure='accuracy', iou_thres
     """ Tune prob_thresh for provided (fixed) nms_thresh to maximize matching score (for given measure and averaged over iou_threshs). """
     np.isscalar(nms_thresh) or _raise(ValueError("nms_thresh must be a scalar"))
     iou_threshs = [iou_threshs] if np.isscalar(iou_threshs) else iou_threshs
-    img_shape = Y[0].shape
     values = dict()
 
     if bracket is None:
@@ -222,7 +230,7 @@ def optimize_threshold(Y, Yhat, model, nms_thresh, measure='accuracy', iou_thres
             prob_thresh = np.clip(thr, *bracket)
             value = values.get(prob_thresh)
             if value is None:
-                Y_instances = [model._instances_from_prediction(img_shape, prob, dist, prob_thresh=prob_thresh, nms_thresh=nms_thresh)[0] for prob, dist in Yhat]
+                Y_instances = [model._instances_from_prediction(y.shape, *prob_dist, prob_thresh=prob_thresh, nms_thresh=nms_thresh)[0] for y,prob_dist in zip(Y,Yhat)]
                 stats = matching_dataset(Y, Y_instances, thresh=iou_threshs, show_progress=False, parallel=True)
                 values[prob_thresh] = value = np.mean([s._asdict()[measure] for s in stats])
             if verbose > 1:
