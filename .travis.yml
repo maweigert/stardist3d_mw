@@ -7,6 +7,10 @@
 
 language: python
 
+branches:
+  only:
+    - 3d
+	
 env:
   - TENSORFLOW='tensorflow' KERAS='keras'
 
