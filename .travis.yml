@@ -67,4 +67,4 @@ install:
 
 script:
   # - echo `which gcc`
-  - pytest -v --durations=50 -m "not gpu"
+  - pytest -v -s --durations=50 -m "not gpu"
