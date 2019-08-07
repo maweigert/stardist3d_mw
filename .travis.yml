@@ -19,15 +19,15 @@ matrix:
     - os: linux
       python: 3.7
       dist: xenial
-      compiler: gcc
-      addons:
-        apt:
-          sources:
-            - ubuntu-toolchain-r-test
-          packages:
-            - g++-6
-      env:
-        - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
+      # compiler: gcc
+      # addons:
+      #   apt:
+      #     sources:
+      #       - ubuntu-toolchain-r-test
+      #     packages:
+      #       - g++-6
+      # env:
+      #   - MATRIX_EVAL="CC=gcc-6 && CXX=g++-6"
 
 
     # - os: linux
@@ -68,14 +68,14 @@ matrix:
     #   env: TENSORFLOW='tensorflow==1.4.1' KERAS='keras==2.1.2'
     #   ###########
 
-before_install:
-  - eval "${MATRIX_EVAL}"
+# before_install:
+#   - eval "${MATRIX_EVAL}"
 
 install: 
   # - pip install $TENSORFLOW $KERAS
-  - CC=gcc-6 && CXX=g++-6 echo `gcc -v`
-  - CC=gcc-6 && CXX=g++-6 pip install .
+  # - CC=gcc-6 CXX=g++-6 echo `gcc -v`
+  - pip install .
 
 script:
-  - echo `which gcc`
-  # - pytest -v --durations=50 -m "not gpu"
+  # - echo `which gcc`
+  - pytest -v --durations=50 -m "not gpu"
