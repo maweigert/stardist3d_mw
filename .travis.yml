@@ -71,7 +71,7 @@ matrix:
 before_install:
   - eval "${MATRIX_EVAL}"
 
-install: skip
+install: 
   # - pip install $TENSORFLOW $KERAS
   - CC=gcc-6 && CXX=g++-6 echo `gcc -V`
   - CC=gcc-6 && CXX=g++-6 pip install .
