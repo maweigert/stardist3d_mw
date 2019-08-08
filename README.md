@@ -1,4 +1,3 @@
-[![Linux build status](https://travis-ci.org/maweigert/stardist3d_mw.svg?branch=3d)](https://travis-ci.org/maweigert/stardist3d_mw)
 </img> <img src="https://cloud.mpi-cbg.de/index.php/s/4OQON14D0tw09tQ/download" width=200px></img>
 <img src="https://travis-ci.org/maweigert/stardist3d_mw.svg?branch=3d">
 
