@@ -1,4 +1,4 @@
-<img src="https://travis-ci.org/maweigert/stardist3d_mw.svg?branch=3d"> </img> <img src="https://cloud.mpi-cbg.de/index.php/s/4OQON14D0tw09tQ/download" width=200px></img>
+<img src="https://cloud.mpi-cbg.de/index.php/s/4OQON14D0tw09tQ/download" width=200px align="top"></img> <img src="https://travis-ci.org/maweigert/stardist3d_mw.svg?branch=3d" align="top"> </img> 
 
 
 # *StarDist* - Object Detection with Star-convex Shapes 
