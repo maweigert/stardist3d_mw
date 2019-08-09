@@ -4,7 +4,8 @@
 # *StarDist* - Object Detection with Star-convex Shapes 
 
 
-![](https://github.com/mpicbg-csbd/stardist/raw/master/images/overview.png)
+![](images/stardist_overview.png)
+
 
 
 This repository contains the implementation of star-convex object detection for 2D and 3D images, as described in the papers: 
@@ -15,6 +16,11 @@ Uwe Schmidt, Martin Weigert, Coleman Broaddus, and Gene Myers.
 International Conference on Medical Image Computing and Computer-Assisted Intervention (MICCAI), Granada, Spain, September 2018.
 
 and 
+
+Martin Weigert, Uwe Schmidt, Robert Haase, Ko Sugawara, and Gene Myers.  
+[*Star-convex Polyhedra for 3D Object Detection and Segmentation in Microscopy*](FIXME).    
+ArXiv. 2019
+
 
 Please cite the paper if you are using this code in your research.
 
@@ -32,7 +38,11 @@ Please cite the paper if you are using this code in your research.
 }
 ```
 
+## Method
 
+Add some description... 
+
+![](https://github.com/mpicbg-csbd/stardist/raw/master/images/overview.png)
 
 
 ## Installation
